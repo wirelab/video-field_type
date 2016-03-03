@@ -39,8 +39,8 @@ interface MatcherInterface
      * Return the embeddable iframe code for a given video ID.
      *
      * @param $id
-     * @param array $options
+     * @param array $attributes
      * @return string
      */
-    public function iframe($id, array $options = []);
+    public function iframe($id, array $attributes = []);
 }

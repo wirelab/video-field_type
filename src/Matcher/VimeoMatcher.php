@@ -1,6 +1,7 @@
 <?php namespace Anomaly\VideoFieldType\Matcher;
 
 use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
+use Collective\Html\HtmlBuilder;
 
 /**
  * Class VimeoMatcher
@@ -13,6 +14,23 @@ use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
 class VimeoMatcher implements MatcherInterface
 {
     /**
+     * The HTML utility.
+     *
+     * @var HtmlBuilder
+     */
+    protected $html;
+
+    /**
+     * Create a new VimeoMatcher instance.
+     *
+     * @param HtmlBuilder $html
+     */
+    public function __construct(HtmlBuilder $html)
+    {
+        $this->html = $html;
+    }
+
+    /**
      * Return the video ID from the video URL.
      *
      * @param $url
@@ -20,7 +38,9 @@ class VimeoMatcher implements MatcherInterface
      */
     public function id($url)
     {
-        return substr(parse_url($url, PHP_URL_PATH), 1);
+        $segments = explode('/', substr(parse_url($url, PHP_URL_PATH), 1));
+
+        return end($segments);
     }
 
     /**
@@ -49,17 +69,14 @@ class VimeoMatcher implements MatcherInterface
      * Return the embeddable iframe code for a given video ID.
      *
      * @param $id
-     * @param array $options
+     * @param array $attributes
      * @return string
      */
-    public function iframe($id, array $options = [])
+    public function iframe($id, array $attributes = [])
     {
         return '<iframe
             frameborder="0"
             src="https://player.vimeo.com/video/' . $id . '"
-            width="' . array_get($options, 'width', 560) . '"
-            height="' . array_get($options, 'height', 315) . '"
-            style="' . array_get($options, 'style', '') . '""
-            ' . array_get($options, 'options', 'allowfullscreen') . '></iframe>';
+            ' . $this->html->attributes($attributes) . '></iframe>';
     }
 }

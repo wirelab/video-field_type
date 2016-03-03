@@ -31,10 +31,10 @@ class VideoFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the embed iframe.
      *
-     * @param array $extra
+     * @param array $attributes
      * @return PluginCriteria
      */
-    public function iframe(array $extra = [])
+    public function iframe(array $attributes = [])
     {
         if (!$this->object->getValue()) {
             return null;
@@ -45,8 +45,8 @@ class VideoFieldTypePresenter extends FieldTypePresenter
 
         return new PluginCriteria(
             'render',
-            function (Collection $options) use ($matcher, $extra) {
-                return $matcher->iframe($matcher->id($this->object->getValue()), $options->merge($extra)->all());
+            function (Collection $options) use ($matcher, $attributes) {
+                return $matcher->iframe($matcher->id($this->object->getValue()), $options->merge($attributes)->all());
             }
         );
     }
@@ -54,10 +54,10 @@ class VideoFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the embed iframe.
      *
-     * @param array $extra
+     * @param array $attributes
      * @return PluginCriteria
      */
-    public function fluid(array $extra = [])
+    public function fluid(array $attributes = [])
     {
         if (!$this->object->getValue()) {
             return null;
@@ -68,11 +68,14 @@ class VideoFieldTypePresenter extends FieldTypePresenter
 
         return new PluginCriteria(
             'render',
-            function (Collection $options) use ($matcher, $extra) {
+            function (Collection $options) use ($matcher, $attributes) {
 
-                $extra['style'] = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;';
+                $attributes['style'] = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;';
 
-                return '<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">'.$matcher->iframe($matcher->id($this->object->getValue()), $options->merge($extra)->all()).'</div>';
+                return '<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">' . $matcher->iframe(
+                    $matcher->id($this->object->getValue()),
+                    $options->merge($attributes)->all()
+                ) . '</div>';
             }
         );
     }

@@ -1,6 +1,7 @@
 <?php namespace Anomaly\VideoFieldType\Matcher;
 
 use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
+use Collective\Html\HtmlBuilder;
 
 /**
  * Class YouTubeMatcher
@@ -12,6 +13,24 @@ use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
  */
 class YouTubeMatcher implements MatcherInterface
 {
+
+    /**
+     * The HTML utility.
+     *
+     * @var HtmlBuilder
+     */
+    protected $html;
+
+    /**
+     * Create a new VimeoMatcher instance.
+     *
+     * @param HtmlBuilder $html
+     */
+    public function __construct(HtmlBuilder $html)
+    {
+        $this->html = $html;
+    }
+
     /**
      * Return the video ID from the video URL.
      *
@@ -51,17 +70,14 @@ class YouTubeMatcher implements MatcherInterface
      * Return the embeddable iframe code for a given video ID.
      *
      * @param $id
-     * @param array $options
+     * @param array $attributes
      * @return string
      */
-    public function iframe($id, array $options = [])
+    public function iframe($id, array $attributes = [])
     {
         return '<iframe
             frameborder="0"
-            width="' . array_get($options, 'width') . '"
-            height="' . array_get($options, 'height') . '"
             src="https://www.youtube.com/embed/' . $id . '"
-            style="' . array_get($options, 'style', '') . '""
-            ' . array_get($options, 'options', 'allowfullscreen') . '></iframe>';
+            ' . $this->html->attributes($attributes) . '></iframe>';
     }
 }
