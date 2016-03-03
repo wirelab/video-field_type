@@ -36,6 +36,10 @@ class VideoFieldTypePresenter extends FieldTypePresenter
      */
     public function iframe(array $extra = [])
     {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
         /* @var MatcherInterface $matcher */
         $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
 
@@ -47,11 +51,37 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         );
     }
 
+    /**
+     * Return the embed URL.
+     *
+     * @return string
+     */
     public function embed()
     {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
         /* @var MatcherInterface $matcher */
         $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
 
         return $matcher->embed($this->object->getValue());
+    }
+
+    /**
+     * Return the video ID.
+     *
+     * @return int
+     */
+    public function id()
+    {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
+        /* @var MatcherInterface $matcher */
+        $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
+
+        return $matcher->id($this->object->getValue());
     }
 }
