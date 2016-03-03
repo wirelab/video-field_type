@@ -1,6 +1,25 @@
 {
     "name": "anomaly/video-field_type",
     "type": "streams-addon",
+    "description": "The video field type provides a simple input for displaying embeddable videos from your favorite provider.",
+    "keywords": [
+        "field type",
+        "pyrocms addon",
+        "field type"
+    ],
+    "homepage": "http://pyrocms.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PyroCMS, Inc.",
+            "email": "support@pyrocms.com",
+            "homepage": "http://pyrocms.com/",
+            "role": "Owner"
+        }
+    ],
+    "support": {
+        "email": "support@pyrocms.com"
+    },
     "autoload": {
         "psr-4": {
             "Anomaly\\VideoFieldType\\": "src/"
