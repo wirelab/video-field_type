@@ -52,6 +52,32 @@ class VideoFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
+     * Return the embed iframe.
+     *
+     * @param array $extra
+     * @return PluginCriteria
+     */
+    public function fluid(array $extra = [])
+    {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
+        /* @var MatcherInterface $matcher */
+        $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
+
+        return new PluginCriteria(
+            'render',
+            function (Collection $options) use ($matcher, $extra) {
+
+                $extra['style'] = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;';
+
+                return '<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">'.$matcher->iframe($matcher->id($this->object->getValue()), $options->merge($extra)->all()).'</div>';
+            }
+        );
+    }
+
+    /**
      * Return the embed URL.
      *
      * @return string

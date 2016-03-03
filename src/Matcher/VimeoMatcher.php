@@ -55,10 +55,11 @@ class VimeoMatcher implements MatcherInterface
     public function iframe($id, array $options = [])
     {
         return '<iframe
+            frameborder="0"
             src="https://player.vimeo.com/video/' . $id . '"
             width="' . array_get($options, 'width', 560) . '"
             height="' . array_get($options, 'height', 315) . '"
-            frameborder="0"
-            ' . array_get($options, 'options', 'allowfullscreen') . '></iframe></iframe>';
+            style="' . array_get($options, 'style', '') . '""
+            ' . array_get($options, 'options', 'allowfullscreen') . '></iframe>';
     }
 }

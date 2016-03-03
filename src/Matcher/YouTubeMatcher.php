@@ -57,10 +57,11 @@ class YouTubeMatcher implements MatcherInterface
     public function iframe($id, array $options = [])
     {
         return '<iframe
+            frameborder="0"
             width="' . array_get($options, 'width') . '"
             height="' . array_get($options, 'height') . '"
             src="https://www.youtube.com/embed/' . $id . '"
-            frameborder="0"
+            style="' . array_get($options, 'style', '') . '""
             ' . array_get($options, 'options', 'allowfullscreen') . '></iframe>';
     }
 }
