@@ -1,0 +1,9 @@
+{
+    "name": "anomaly/video-field_type",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Anomaly\\VideoFieldType\\": "src/"
+        }
+    }
+}
