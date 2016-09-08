@@ -1,7 +1,6 @@
 <?php namespace Anomaly\VideoFieldType\Matcher\Command;
 
 use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 
@@ -11,9 +10,8 @@ use Illuminate\Contracts\Container\Container;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\VideoFieldType\Matcher\Command
  */
-class GetMatcher implements SelfHandling
+class GetMatcher
 {
 
     /**
@@ -36,8 +34,8 @@ class GetMatcher implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Repository $config
-     * @param Container $container
+     * @param  Repository            $config
+     * @param  Container             $container
      * @return MatcherInterface|null
      */
     public function handle(Repository $config, Container $container)
@@ -54,7 +52,7 @@ class GetMatcher implements SelfHandling
     /**
      * Return the match result for the matcher.
      *
-     * @param MatcherInterface $matcher
+     * @param  MatcherInterface $matcher
      * @return bool
      */
     protected function matches(MatcherInterface $matcher)
