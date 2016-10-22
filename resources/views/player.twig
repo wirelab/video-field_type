@@ -1,0 +1,5 @@
+{{ asset_add('styles.css', 'anomaly.field_type.video::scss/plyr.scss') }}
+{{ asset_add('scripts.js', 'anomaly.field_type.video::js/plyr.js') }}
+{{ asset_add('scripts.js', 'anomaly.field_type.video::js/player.js') }}
+
+<div data-type="{{ video.provider|lower }}" data-video-id="{{ video.id }}"></div>

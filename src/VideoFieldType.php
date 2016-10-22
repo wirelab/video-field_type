@@ -5,10 +5,9 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 /**
  * Class VideoFieldType
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\VideoFieldType
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class VideoFieldType extends FieldType
 {
@@ -19,7 +18,7 @@ class VideoFieldType extends FieldType
      * @var array
      */
     protected $rules = [
-        'url'
+        'url',
     ];
 
     /**

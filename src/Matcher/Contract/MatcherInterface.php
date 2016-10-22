@@ -38,9 +38,16 @@ interface MatcherInterface
     /**
      * Return the embeddable iframe code for a given video ID.
      *
-     * @param $id
+     * @param       $id
      * @param array $attributes
      * @return string
      */
     public function iframe($id, array $attributes = []);
+
+    /**
+     * Get the provider.
+     *
+     * @return string
+     */
+    public function getProvider();
 }

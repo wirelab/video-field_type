@@ -10,10 +10,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 /**
  * Class VideoFieldTypePresenter
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\VideoFieldType
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class VideoFieldTypePresenter extends FieldTypePresenter
 {
@@ -112,5 +111,37 @@ class VideoFieldTypePresenter extends FieldTypePresenter
         $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
 
         return $matcher->id($this->object->getValue());
+    }
+
+    /**
+     * Return the video provider.
+     *
+     * @return string
+     */
+    public function provider()
+    {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
+        /* @var MatcherInterface $matcher */
+        $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
+
+        return $matcher->getProvider();
+    }
+
+    /**
+     * Return the player.
+     *
+     * @return string
+     */
+    public function player()
+    {
+        return view(
+            'anomaly.field_type.video::player',
+            [
+                'video' => $this,
+            ]
+        )->render();
     }
 }

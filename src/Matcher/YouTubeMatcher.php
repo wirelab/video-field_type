@@ -1,18 +1,23 @@
 <?php namespace Anomaly\VideoFieldType\Matcher;
 
-use Anomaly\VideoFieldType\Matcher\Contract\MatcherInterface;
 use Collective\Html\HtmlBuilder;
 
 /**
  * Class YouTubeMatcher
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\VideoFieldType\Matcher
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class YouTubeMatcher implements MatcherInterface
+class YouTubeMatcher extends AbstractMatcher
 {
+
+    /**
+     * The provider.
+     *
+     * @var string
+     */
+    protected $provider = 'YouTube';
 
     /**
      * The HTML utility.
@@ -69,7 +74,7 @@ class YouTubeMatcher implements MatcherInterface
     /**
      * Return the embeddable iframe code for a given video ID.
      *
-     * @param $id
+     * @param       $id
      * @param array $attributes
      * @return string
      */
