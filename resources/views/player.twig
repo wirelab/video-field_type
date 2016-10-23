@@ -1,4 +1,7 @@
-{{ asset_add('styles.css', 'anomaly.field_type.video::scss/plyr.scss') }}
+<style type="text/css">
+    {{ asset_inline('anomaly.field_type.video::scss/plyr.scss') }}
+</style>
+
 {{ asset_add('scripts.js', 'anomaly.field_type.video::js/plyr.js') }}
 {{ asset_add('scripts.js', 'anomaly.field_type.video::js/player.js') }}
 
