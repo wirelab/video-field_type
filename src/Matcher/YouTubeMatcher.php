@@ -77,7 +77,7 @@ class YouTubeMatcher extends AbstractMatcher
      */
     public function cover($id)
     {
-        return $this->image->make('https://img.youtube.com/vi/' . $id . '/0.jpg');
+        return $this->image->make('https://img.youtube.com/vi/' . $id . '/0.jpg', 'image');
     }
 
     /**
