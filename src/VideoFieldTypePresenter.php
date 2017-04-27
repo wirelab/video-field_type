@@ -72,9 +72,9 @@ class VideoFieldTypePresenter extends FieldTypePresenter
                 $attributes['style'] = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;';
 
                 return '<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">' . $matcher->iframe(
-                    $matcher->id($this->object->getValue()),
-                    $options->merge($attributes)->all()
-                ) . '</div>';
+                        $matcher->id($this->object->getValue()),
+                        $options->merge($attributes)->all()
+                    ) . '</div>';
             }
         );
     }
@@ -143,5 +143,40 @@ class VideoFieldTypePresenter extends FieldTypePresenter
                 'video' => $this,
             ]
         )->render();
+    }
+
+    /**
+     * Return the cover image.
+     *
+     * @return null
+     */
+    public function cover()
+    {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
+        /* @var MatcherInterface $matcher */
+        $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
+
+        return $matcher->cover($this->id());
+    }
+
+    /**
+     * Return an image.
+     *
+     * @param null $image
+     * @return null
+     */
+    public function image($image = null)
+    {
+        if (!$this->object->getValue()) {
+            return null;
+        }
+
+        /* @var MatcherInterface $matcher */
+        $matcher = $this->dispatch(new GetMatcher($this->object->getValue()));
+
+        return $matcher->image($this->id(), $image);
     }
 }

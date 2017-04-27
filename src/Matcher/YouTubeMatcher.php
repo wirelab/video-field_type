@@ -1,6 +1,6 @@
 <?php namespace Anomaly\VideoFieldType\Matcher;
 
-use Collective\Html\HtmlBuilder;
+use Anomaly\Streams\Platform\Image\Image;
 
 /**
  * Class YouTubeMatcher
@@ -18,23 +18,6 @@ class YouTubeMatcher extends AbstractMatcher
      * @var string
      */
     protected $provider = 'YouTube';
-
-    /**
-     * The HTML utility.
-     *
-     * @var HtmlBuilder
-     */
-    protected $html;
-
-    /**
-     * Create a new VimeoMatcher instance.
-     *
-     * @param HtmlBuilder $html
-     */
-    public function __construct(HtmlBuilder $html)
-    {
-        $this->html = $html;
-    }
 
     /**
      * Return the video ID from the video URL.
@@ -84,5 +67,28 @@ class YouTubeMatcher extends AbstractMatcher
             frameborder="0"
             src="https://www.youtube.com/embed/' . $id . '"
             ' . $this->html->attributes($attributes) . '></iframe>';
+    }
+
+    /**
+     * Return the video's cover image.
+     *
+     * @param $id
+     * @return Image
+     */
+    public function cover($id)
+    {
+        return $this->image->make('https://img.youtube.com/vi/' . $id . '/0.jpg');
+    }
+
+    /**
+     * Return a video image.
+     *
+     * @param      $id
+     * @param null $image
+     * @return Image
+     */
+    public function image($id, $image = null)
+    {
+        return $this->image->make('https://img.youtube.com/vi/' . $id . '/' . ($image ?: 1) . '.jpg');
     }
 }
